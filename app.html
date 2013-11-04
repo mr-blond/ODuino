@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>Arduino - Experiment</title>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<style>
+			@import "http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css";
+			#slider-vertical{
+				margin-left: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="debug" style="width:100%; text-align:center; margin-top:100px;"></div>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<button class="btn" data-pos="180" data-pin="11">SET 180</button>
+		<button class="btn" data-pos="090" data-pin="11">SET 90</button>
+		<button class="btn" data-pos="000" data-pin="11">SET 0</button> <br>
+		
+		<button class="btn" data-pos="180" data-pin="12">SET 180</button>
+		<button class="btn" data-pos="090" data-pin="12">SET 90</button>
+		<button class="btn" data-pos="000" data-pin="12">SET 0</button> <br>
+		
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io.connect();
+
+			socket.on('connexion', function () {
+					console.log("Connected");
+			});
+			
+			
+			socket.emit('slide', {'pos':110,'pin':11});
+			
+			$('.btn').on('click',function(){
+				var val = $(this).data('pos');
+				var pin = $(this).data('pin');
+				socket.emit('slide', {'pos':val,'pin':pin});
+				$('#debug').html('Trame : !'+pin+'-'+val+':')
+			});
+			
+
+		</script>	
+	</body>
+</html>
+	
