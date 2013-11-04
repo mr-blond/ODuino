@@ -1,0 +1,13 @@
+{
+  "name": "ODuino",
+
+  "dependencies": {
+	"serialport": "1.2.3",
+	"socket.io": "0.9.16",
+  },
+  "engine": "node >= 0.10.20",
+  "scripts": {
+	"start": "node app.js"
+  },
+
+}
